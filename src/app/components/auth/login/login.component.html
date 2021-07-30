@@ -1,0 +1,62 @@
+<app-loading *ngIf='loading'></app-loading>
+
+<div *ngIf='isLogged; else loggedOut' class='card text-white bg-success m-3' style='max-width: 25rem;'>
+  <div class='card-header'>Usuario autenticado</div>
+  <div class='card-body'>
+    <h5 class='card-title'>Sistema de test</h5>
+    <p class='card-text'>Por favor elija una opción del menú.</p>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+    <div class='container animated fadeIn fast' style='width: 40rem;'>
+
+      <form class='bg-light' [formGroup]='formGroup' (ngSubmit)='onLogin()' novalidate>
+
+          <div class='card-header text-center bg-dark text-success'>
+            <h3 class='card-title'>{{title}}</h3>
+          </div>
+
+        <div class='card-body'>
+
+          <div class='row m-1'>
+            <div class='col'>
+              <div class='form-floating '>
+                <input class='form-control  ' type='text' placeholder='Username or email' required formControlName='username' autocomplete='off'>
+                <label for='username'><em class='bi bi-envelope-fill  '></em> Usuario</label>
+              </div>
+            </div>
+          </div>
+
+          <div class='row align-items-center m-1'>
+            <div class='col-11'>
+              <div class='form-floating '>
+                <input class='form-control ' [type]="fieldTextType ? 'text' : 'password'" placeholder='Password' required formControlName='password' autocomplete='new-password' >
+                <label for='password'><em class='bi-key-fill '></em> Contraseña </label>
+              </div>
+            </div>
+            <div class='col-1'>
+              <input type='checkbox' class='btn-check' id='show' (click)='toggleFieldTextType()'>
+              <label class=' ' for='show'><em class= ' ' [ngClass]="{'bi-eye-slash-fill': !fieldTextType, 'bi-eye-fill': fieldTextType}" style='cursor: pointer;' ></em></label>
+            </div>
+          </div>
+
+          <div class='row m-1'>
+            <div class='col-3'>
+              <button class='btn btn-outline-success' [disabled]='formGroup.invalid'>
+                <em class='bi bi-unlock'></em> Acceder
+              </button>
+            </div>
+            <div class='col-3'>
+              <button class='btn btn-outline-secondary' (click)="go('/')">
+                <em class='bi bi-dash-circle'></em> Cancelar
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class='g-signin2' data-onsuccess='onSignIn'></div>
+</ng-template>

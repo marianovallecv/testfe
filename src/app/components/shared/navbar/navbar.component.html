@@ -1,0 +1,48 @@
+<nav class='navbar mb-1 bg-dark sticky-top'>
+  <div class='collapse' id='navbarToggleExternalContent'>
+    <div class='p-4'>
+      <h5 class='h4 text-success'>Collapsed content</h5>
+      <span class='text-success'>Toggleable via the navbar brand.</span>
+    </div>
+  </div>
+  <div class='container-fluid'>
+    <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation'>
+      <span class='bi bi-x-diamond-fill text-success' style='font-size: 1.5rem;'> {{title}}</span>
+    </button>
+    <div *ngIf='isLogged' class='navbar navbar-expand-lg'>
+      <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDarkDropdown' aria-controls='navbarNavDarkDropdown' aria-expanded='false' aria-label='Toggle navigation'>
+        <span class='navbar-toggler-icon'></span>
+      </button>
+      <div class='collapse navbar-collapse' id='navbarNavDarkDropdown'>
+        <button type='button' class='btn btn-outline-success'  data-bs-toggle='dropdown' aria-expanded='false'>
+          <em class='bi bi-person-circle' title='Acceder'></em> {{userName}}
+        </button>
+        <ul class='dropdown-menu dropdown-menu bg-dark' aria-labelledby='navbarDarkDropdownMenuLink'>
+
+          <li (click)="go('/');">
+            <a class='dropdown-item text-success' style='cursor: pointer;'>
+              <em class='bi bi-house-door'></em> Ir al incio
+            </a>
+          </li>
+
+          <li  (click)="go('/candidates');" style='cursor: pointer;'>
+            <a class='dropdown-item text-success' >
+              <em class='bi bi-person-fill'></em> Gestión de candidatos
+            </a>
+          </li>
+
+          <li (click)='onLogOut();'>
+            <a class='dropdown-item text-success'style='cursor: pointer;'>
+              <em class='bi bi-door-open'></em> Cerrar Sesión
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class='navbar navbar-expand-lg'>
+      <button type='button' *ngIf='showLogin' class='btn btn-outline-success' (click)='loguin();'>
+          <em class='bi bi-unlock' title='Acceder'></em> Iniciar sesión
+      </button>
+    </div>
+  </div>
+</nav>
