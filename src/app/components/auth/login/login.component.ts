@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
           this.loading = false;
 
           this.router.navigate(['/']);
-          //window.location.reload();
+          window.location.reload();
         },
         (error: any) => {
           this.isLogged = false;

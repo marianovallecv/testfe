@@ -1,10 +1,5 @@
 import { HttpHeaders } from '@angular/common/http';
-import { Observable, throwError  } from 'rxjs';
 import { environment as e } from '../../environments/environment';
-import { GlobalIcons as gi, GlobalTheme as gtc, GlobalStyles as gsc
-  , GlobalBackGroundColor as gbc, GlobalBackGroundColorButton as gbbc, GlobalTextColor as gtxc
-  , GlobalTableColor as gttc
-  , GlobalMargin as gm} from './bootstrap-config';
 import { Configiguration } from '../model/configuration/configuration';
 
 /**
@@ -115,187 +110,13 @@ const LocalFunctions = Object.freeze({
     return configuration;
   },
 
-  /**
-   * Total margin between controls
-   *
-   * ml/mr/mb/mt
-   *
-   * mgcg
-   */
-  modeMGCG(): string{
-    return gm.MARGIN_GLOBAL_CONTROL.M1;
-  },
-
-  /**
-   * Bottom margin between controls
-   *
-   * mb
-   *
-   * mgbg
-   */
-  modeMGCB(): string{
-    return gm.MARGIN_BOTTON_GLOBAL_CONTROL.MB2;
-  },
-
-});
-
-/**
- * Funciones accesibles.
- */
-export const GlobalFunctions = Object.freeze({
-
-  /**
-   * Error handling
-   */
-  // handleError(error: any): Observable<never>{
-  //   let errorMessage = '';
-  //   if (error.error instanceof ErrorEvent) {
-  //     // Get client-side error
-  //     errorMessage = `Message: ${error.error.message}`;
-  //   } else {
-  //     // Get server-side error
-  //     errorMessage = `Error Code: ${error.status}\nMessage: ${error.error.message}`;
-  //   }
-  //   window.alert(errorMessage);
-  //   return throwError(errorMessage);
-  // },
-
-  /**
-   * Background form.
-   */
-  modeBGCT(mode: number): string{
-    switch (mode) {
-      case GlobalVariables.MODE.MODE_ABM: {
-        return  gbc.BACKGROUND_COLOR.SECONDARY;
-      }
-      case GlobalVariables.MODE.MODE_SEARCH: {
-        return gbc.BACKGROUND_COLOR.INFO;
-      }
-      case GlobalVariables.MODE.MODE_ABM_SEARCH: {
-        return gbc.BACKGROUND_COLOR.PRIMARY;
-      }
-      case GlobalVariables.MODE.MODE_ABM_DATA: {
-        return '';
-      }
-      case GlobalVariables.MODE.MODE_NONE: {
-        return  gbc.BACKGROUND_COLOR.DANGER;
-      }
-      case GlobalVariables.MODE.MODE_ABM_GENERIC: {
-        return gbc.BACKGROUND_COLOR.SUCCESS;
-      }
-      default: {
-        return '';
-      }
-    }
-  },
-  /**
-   * Text color title.
-   */
-  modeTXCT(mode: number): string{
-    switch (mode) {
-      case GlobalVariables.MODE.MODE_ABM: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.SECONDARY
-      }
-      case GlobalVariables.MODE.MODE_SEARCH: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.INFO
-      }
-      case GlobalVariables.MODE.MODE_ABM_SEARCH: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.PRIMARY
-      }
-      case GlobalVariables.MODE.MODE_ABM_DATA: {
-        return '';
-      }
-      case GlobalVariables.MODE.MODE_NONE: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.DANGER
-      }
-      case GlobalVariables.MODE.MODE_ABM_GENERIC: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.SUCCESS
-      }
-      default: {
-        return '';
-      }
-    }
-  },
-  /**
-   * Background ABM.
-   */
-  modeABMBG(modeABM: number): string{
-    switch (modeABM) {
-      case GlobalVariables.MODE_ABM.MODE_ABM_LIST: {
-        return gbc.BACKGROUND_COLOR.INFO;
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_DETAIL: {
-        return gbc.BACKGROUND_COLOR.PRIMARY;
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_CREATE: {
-        return gbc.BACKGROUND_COLOR.SUCCESS;
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_UPDATE: {
-        return gbc.BACKGROUND_COLOR.WARNING;
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_DUPLICATE: {
-        return gbc.BACKGROUND_COLOR.SECONDARY;
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_DELETE: {
-        return gbc.BACKGROUND_COLOR.DANGER;
-      }
-      case GlobalVariables.MODE_ABM.MODE_NONE: {
-        return gbc.BACKGROUND_COLOR.DANGER;
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_GENERIC: {
-        return gbc.BACKGROUND_COLOR.DARK;
-      }
-      default: {
-        return '';
-      }
-    }
-  },
-  /**
-   * Text color ABM.
-   */
-  modeABMTT(modeABM: number): string{
-    switch (modeABM) {
-      case GlobalVariables.MODE_ABM.MODE_ABM_LIST: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.INFO
-
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_DETAIL: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.PRIMARY
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_CREATE: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.SUCCESS
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_UPDATE: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.WARNING
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_DUPLICATE: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.SECONDARY
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_DELETE: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.DANGER
-      }
-      case GlobalVariables.MODE_ABM.MODE_NONE: {
-        return gtxc.TEXT_COLOR.DARK; // BACKGROUND_COLOR.DANGER
-      }
-      case GlobalVariables.MODE_ABM.MODE_ABM_GENERIC: {
-        return gtxc.TEXT_COLOR.SUCCESS; // BACKGROUND_COLOR.DARK
-      }
-      default: {
-        return '';
-      }
-    }
-  },
-
 });
 
 /**
  * Variables accesibles localmente.
  */
 const LocalVariables = Object.freeze({
-    GLOBAL_THEME: gtc.COLOR.CONTRAST,
     PAGE_SIZE: 7,
-
-
   });
 
 /**
@@ -307,11 +128,6 @@ export const GlobalVariables = Object.freeze({
    * Cofiguración general
    */
   CONFIGURATION: LocalFunctions.returnConfig(),
-
-  //PAGE_SIZE: LocalVariables.PAGE_SIZE,
-
-  BG_COLOR: gbc.BACKGROUND_COLOR,
-
 
   // --------------------------------------------- config -----------------------------------------------
 
@@ -366,7 +182,4 @@ export const GlobalVariables = Object.freeze({
     MODE_FULL: 1,
   },
 
-  GLOBAL_STYLE_MESSAGE: gsc.STYLE,
-
-  MESSAGE_TYPE: gsc.MESSAGE_TYPE
 });
