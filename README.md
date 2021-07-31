@@ -88,42 +88,35 @@ GET 'http://localhost:8020/candidates'
 ```
 
 #### Get pages filter:
-Reemplazar [DATA] por el documento o nombre t apellido.
+Reemplazar [DATA] por el documento o nombre t apellido, para obtener una paginacón de los candidatos (nombre completo y DNI).
 
 ```
 GET 'http://127.0.0.1:8020/candidates/filter/[DATA]' \
 ```
 
 #### Get by email:
-Reemplazar [EMAIL] por el email deseado.
+Reemplazar [EMAIL] por el email deseado, para obtener la información completa de un candidato en particular filtrado por email.
 
 ```
 GET 'http://localhost:8020/candidates/email/[EMAIL]'
 ```
 
 #### Get by document:
-Reemplazar [DOCUMENT] por el documento deseado.
+Reemplazar [DOCUMENT] por el documento deseado, para obtener la información completa de un candidato en particular filtrado por documento.
 
 ```
 GET 'http://localhost:8020/candidates/document/[DOCUMENT]'
 ```
 
 #### Get by fullName:
-Reemplazar [FULL_NAME] por el nombre y apellido deseado.
+Reemplazar [FULL_NAME] por el nombre y apellido deseado, para obtener la información completa de un candidato en particular filtrado por nombre y apellido.
 
 ```
 GET 'http://localhost:8020/candidates/fullName/[FULL_NAME]'
 ```
 
-#### Get by document:
-Reemplazar [FULL_NAME] por el nombre y apellido deseado.
-
-```
-curl --location --request GET 'http://localhost:8020/candidates/fullName/[FULL_NAME]'
-```
-
 #### Post one:
-Reemplazar "[FULL_NAME]", [DOCUMENT], "[BIRTH]", "[ADDRESS]", "[PHONE]", "[EMAIL]" por los valores deseados.
+Reemplazar "[FULL_NAME]", [DOCUMENT], "[BIRTH]", "[ADDRESS]", "[PHONE]", "[EMAIL]" por los valores deseados, para crear un nuevo canditato.
 
 ```
 POST 'http://localhost:8020/candidates/'
@@ -138,7 +131,7 @@ POST 'http://localhost:8020/candidates/'
 ```
 
 #### Put one:
-Reemplazar [ID] por el id a modificar y "[FULL_NAME]", [DOCUMENT], "[BIRTH]", "[ADDRESS]", "[PHONE]", "[EMAIL]" por los valores deseados.
+Reemplazar [ID] por el id a modificar y "[FULL_NAME]", [DOCUMENT], "[BIRTH]", "[ADDRESS]", "[PHONE]", "[EMAIL]" por los valores deseados, para modificar un canditato.
 
 ```
 PUT 'http://localhost:8020/candidates/[ID]'
@@ -153,7 +146,7 @@ PUT 'http://localhost:8020/candidates/[ID]'
 ```
 
 #### Delete one:
-Reemplazar [ID] por el id a eliminar.
+Reemplazar [ID] por el id deseado, para eliminar un canditato.
 
 ```
 DELETE 'http://localhost:8020/candidates/[ID]'

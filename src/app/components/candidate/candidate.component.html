@@ -70,13 +70,14 @@
                       <!-- ABM -->
                       <em *ngIf='col.isAdmin && (col.mode == 0 || col.mode == 2)' [style]=col.style class='{{col.icon}}'
                       (click)='onOne()'
-                        routerLink='/{{service.module}}/{{col.routerLink}}/{{object.id}}'
+                        routerLink='/{{service.module}}/{{object.id}}'
                         [queryParams]="{modeABM: col.modeABM}"
                         title='{{col.title}}'>
                       </em>
                     </td>
                   </tr>
                 </tbody>
+                <!-- routerLink='/{{service.module}}/{{col.routerLink}}/{{object.id}}' -->
 
                 <!-- Footer -->
                 <tfoot class="table-dark text-light">
@@ -225,6 +226,25 @@
               </div>
             </div>
           </div>
+
+
+
+          <!-- Confirm Action -->
+          <div class='m-3' *ngIf='isAdmin'>
+            <button class='btn btn-outline-warning btn-lb' routerLink='/candidates/create' title = 'Nuevo'>
+            <em class='bi bi-plus-circle'></em> Actualizar datos de del candidato
+            </button>
+          </div>
+          <div class='m-3' *ngIf='isAdmin'>
+            <button class='btn btn-outline-danger btn-lb' routerLink='/candidates/delete' title = 'Nuevo' (click)='delete(id)' >
+            <em class='bi bi-plus-circle'></em> Eliminar candidato
+            delete
+            </button>
+          </div>
+
+
+
+
         </div>
       </div>
 

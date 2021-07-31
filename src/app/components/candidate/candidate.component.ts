@@ -153,7 +153,7 @@ export class CandidateComponent implements OnInit {
 
     this.formGroup.get('fullName')?.setValue(data.fullName);
     this.formGroup.get('document')?.setValue(data.document);
-    this.formGroup.get('birth')?.setValue(formatDate(data.birth, 'yyyy-MM-ddThh:mm:ss.SSS', 'es', 'UTC'));
+    this.formGroup.get('birth')?.setValue(formatDate(data.birth, 'yyyy-MM-dd', 'es', 'UTC'));
     this.formGroup.get('address')?.setValue(data.address);
     this.formGroup.get('phone')?.setValue(data.phone);
     this.formGroup.get('email')?.setValue(data.email);

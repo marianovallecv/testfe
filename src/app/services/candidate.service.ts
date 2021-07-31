@@ -12,7 +12,7 @@ import { ColumnsABM} from '../model/configuration/columns';
 })
 export class CandidateService {
   module: string = 'candidates';
-  class: string = 'candidate';
+  class: string = 'candidates';
 
   url = gv.CONFIGURATION.general.apiURL + '/' + this.module + '/';
 
@@ -56,7 +56,7 @@ export class CandidateService {
   }
 
   public oneByEmail(email: string): Observable<Candidate> {
-    return this.http.get<Candidate>(this.url + `oneByEmail/${email}/`)
+    return this.http.get<Candidate>(this.url + `oneByEmail/${email}`)
     .pipe(
       retry(1),
     );
@@ -77,7 +77,8 @@ export class CandidateService {
   }
 
   public delete(id: number): Observable<any> {
-    return this.http.delete<any>(this.url + 'delete/' + id, gv.httpOptionsJSON)
+    //return this.http.delete<any>(this.url + 'delete/' + id, gv.httpOptionsJSON)
+    return this.http.delete<any>(this.url + `delete/${id}`)
     .pipe(
       retry(1),
     );
