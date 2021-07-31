@@ -86,7 +86,7 @@ const LocalFunctions = Object.freeze({
           general: {
             production: false,
             name: 'Development',
-            title: 'Project Development',
+            title: 'Project Test',
             apiURL: 'http://127.0.0.1:8020',
             value: '',
             valueName: LocalFunctions.valueName(),
@@ -308,7 +308,7 @@ export const GlobalVariables = Object.freeze({
    */
   CONFIGURATION: LocalFunctions.returnConfig(),
 
-  PAGE_SIZE: LocalVariables.PAGE_SIZE,
+  //PAGE_SIZE: LocalVariables.PAGE_SIZE,
 
   BG_COLOR: gbc.BACKGROUND_COLOR,
 

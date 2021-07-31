@@ -13,8 +13,8 @@ export class FooterComponent implements OnInit {
 
   constructor() {
     this.anio = new Date().getFullYear();
-    this.compani = 'Project Development';
-    this.web = 'https:\\www.gitlab.com';
+    this.compani = 'Project Test';
+    this.web = 'https://github.com/marianovallecv/testfe';
   }
 
   ngOnInit(): void {

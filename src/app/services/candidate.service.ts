@@ -27,13 +27,6 @@ export class CandidateService {
     );
   }
 
-  public pages2(page: number, size: number, column: string, isAscending: boolean): Observable<Candidate[]> {
-    return this.http.get<Candidate[]>(this.url + `pages/?page=${page}&size=${size}&column=${column}&isAscending=${isAscending}`)
-    .pipe(map(data => data));
-    //.pipe(map(data => data[''].items));
-  }
-
-
   public all(): Observable<Candidate[]> {
     return this.http.get<Candidate[]>(this.url + 'all')
     .pipe(
@@ -55,8 +48,8 @@ export class CandidateService {
     );
   }
 
-  public oneByUsername(username: string): Observable<Candidate> {
-    return this.http.get<Candidate>(this.url + `oneByUsername/${username}`)
+  public oneByFullName(fullname: string): Observable<Candidate> {
+    return this.http.get<Candidate>(this.url + `/${fullname}`)
     .pipe(
       retry(1),
     );
@@ -69,22 +62,15 @@ export class CandidateService {
     );
   }
 
-  public findBySelUser(selUser: string): any {
-    return this.http.get<Candidate>(this.url + `findBySelUser/${selUser}/`)
+  public save(entity: Candidate): Observable<any> {
+    return this.http.post<any>(this.url + 'save', JSON.stringify(entity), gv.httpOptionsJSON)
     .pipe(
       retry(1),
     );
   }
 
-  public save(user: Candidate): Observable<any> {
-    return this.http.post<any>(this.url + 'save', JSON.stringify(user), gv.httpOptionsJSON)
-    .pipe(
-      retry(1),
-    );
-  }
-
-  public update(id: number, user: Candidate): Observable<any> {
-    return this.http.put<any>(this.url + 'update/' + id, JSON.stringify(user), gv.httpOptionsJSON)
+  public update(id: number, entity: Candidate): Observable<any> {
+    return this.http.put<any>(this.url + 'update/' + id, JSON.stringify(entity), gv.httpOptionsJSON)
     .pipe(
       retry(1),
     );
@@ -103,25 +89,18 @@ export class CandidateService {
    */
   public columns(): ColumnsABM[] {
     return [
-
-      // private Integer id;
-      // private String fullName;
-      // private Integer document;
-
-      // private Date birth;
-      // private String address;
-      // private String phone;
-      // private String email;
-
-
-      {field: 'id', target: '', header: 'Id', type: 'number', format: '', class: '', iconSort: 'fas fa-sort',  icon: '', style: '', width: '20', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, title: '', mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
-      {field: 'fullName', target: '', header: 'Nombre y apellido', type: 'string', format: 'capitalize', class: '', iconSort: 'fas fa-sort', icon: '', style: '', width: '45', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
+      {field: 'id', target: '', header: 'Id', type: 'number', format: '', class: '', iconSort: 'fas fa-sort',  icon: '', style: 'width: 10;', width: '20', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, title: '', mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
+      {field: 'fullName', target: '', header: 'Nombre y apellido', type: 'string', format: 'capitalize', class: '', iconSort: 'fas fa-sort', icon: '', style: 'width: 100;', width: '45', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
       {field: 'document', target: '', header: 'Documento', type: 'string', format: '', class: '', iconSort: 'fas fa-sort', icon: '', style: '', width: '45', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
 
-      {field: 'birth', target: '', header: 'Nacimiento', type: 'date', format: '', class: '', iconSort: 'fas fa-sort', icon: '', style: '', width: '35', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
-      {field: 'address', target: '', header: 'Domicilio', type: 'string', format: 'capitalize', class: '', iconSort: 'fas fa-sort', icon: '', style: '', width: '45', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
-      {field: 'phone', target: '', header: 'Teléfono', type: 'string', format: '', class: '', iconSort: 'fas fa-sort', icon: '', style: '', width: '30', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
-      {field: 'email', target: '', header: 'Email', type: 'string', format: 'lowercase', class: '', iconSort: 'fas fa-sort', icon: '', style: '', width: '60', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
+      //{field: 'birth', target: '', header: 'Nacimiento', type: 'date', format: '', class: '', iconSort: 'fas fa-sort', icon: '', style: '', width: '35', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
+      //{field: 'address', target: '', header: 'Domicilio', type: 'string', format: 'capitalize', class: '', iconSort: 'fas fa-sort', icon: '', style: '', width: '45', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
+      //{field: 'phone', target: '', header: 'Teléfono', type: 'string', format: '', class: '', iconSort: 'fas fa-sort', icon: '', style: '', width: '30', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
+      //{field: 'email', target: '', header: 'Email', type: 'string', format: 'lowercase', class: '', iconSort: 'fas fa-sort', icon: '', style: '', width: '60', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
+
+      {field: '#', target: '', header: '', type: '', format: '', class: '', iconSort: '', icon: 'bi bi-eye', style: 'cursor: pointer; color: green', width: '10', col: 'col-1', color: 'gray', cursor: 'pointer', routerLink: this.class, isAdmin: true, isSort: true, title: 'Consultar', mode: gv.MODE.MODE_ABM, modeABM: gv.MODE_ABM.MODE_ABM_DETAIL},
+      {field: '#', target: '', header: '', type: '', format: '', class: '', iconSort: '', icon: 'bi bi-record-circle', style: 'cursor: pointer; color: orange', width: '10', col: 'col-1', color: 'orange', cursor: 'pointer', routerLink: this.class, isAdmin: true, isSort: true, title: 'Actualizar', mode: gv.MODE.MODE_ABM, modeABM: gv.MODE_ABM.MODE_ABM_UPDATE},
+      {field: '#', target: '', header: '', type: '', format: '', class: '', iconSort: '', icon: 'bi bi-x-circle', style: 'cursor: pointer; color: red', width: '10', col: 'col-1', color: 'red', cursor: 'pointer', routerLink: this.class, isAdmin: true, isSort: true, title: 'Eliminar', mode: gv.MODE.MODE_ABM, modeABM: gv.MODE_ABM.MODE_ABM_DELETE},
     ];
   }
 }

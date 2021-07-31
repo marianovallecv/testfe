@@ -1,8 +1,8 @@
 <nav class='navbar mb-1 bg-dark sticky-top'>
-  <div class='collapse' id='navbarToggleExternalContent'>
+  <div *ngIf='isLogged' class='collapse' id='navbarToggleExternalContent'>
     <div class='p-4'>
-      <h5 class='h4 text-success'>Collapsed content</h5>
-      <span class='text-success'>Toggleable via the navbar brand.</span>
+      <h5 class='h4 text-success'>Bienvedido</h5>
+      <span class='text-success'>Sistema de test, por favor elija una opción.</span>
     </div>
   </div>
   <div class='container-fluid'>

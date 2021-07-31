@@ -1,27 +1,164 @@
-# Testfe
+# Proyecto Test (frontend)
+***
+Este repositorio de Git contiene el código fuente de la APP **testfe**, que consume la API **testbe**, ademas contiene informacion acerca de su uso.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.4.
 
-## Development server
+## Contenidos
+* [1. Considerations](#Considerations)
+* [2. Prerequisites](#Prerequisites)
+* [3. Instalation](#Instalation)
+* [3.1 Sources](#Sources)
+* [3.2 Build](#Build)
+* [3.3 Database](#Database)
+* [4. IDE](#IDE)
+* [5. Test](#Test)
+* [6. Technologies](#Technologies)
+* [7. API](#API)
+* [8. Author](#Author)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Considerations:
+Antes de importar este proyecto, tener en cuenta que solo esta configurado para correr localmente.
+Este proyecto está en un estado de prueba, actualmente en desarrollo.
+Se usaran dos proyectos:
 
-## Code scaffolding
+* **testbe:** Para ejecutar el backend:
+* **testfe:** Para ejecutar el frontend
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+En este apartado se trataran las especificaciones del **frontend**.
 
-## Build
+## Prerequisites
+- Tener instalado el proyecto **testbe:**.
+- En caso de querer desarrollar funcionalidades contar con un IDE como por ejemplo Visual Studio Code.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Instalation
 
-## Running unit tests
+##### Sources
+* Descargar el proyeco desde el [repositorio GITHUB](https://github.com/marianovallecv/testfe)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+##### Build
+Podemos invocar el siguiente comando desde la raíz del repositorio si queremos construir el repositorio completo.
+Los artefactos de construcción se almacenarán en el directorio `dist /`.
 
-## Running end-to-end tests
+```
+ng build
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Server
 
-## Further help
+Ejecutar `ng serve --o` para generar un servidor de desarrollo.
+Navegar a `http://localhost:4200/`.
+La aplicación se recargará automáticamente si cambia alguno de los archivos de origen.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## IDE
+Este repositorio contiene solamente un módulos.
+Simplemente puede importar ese módulo en particular en Visual Studio Code.
+
+## Technologies
+Listado de las tecnologías usadas para este proyecto:
+* [Angular](https://angular.io): Version 12.0.4
+* [TypeScript](https://www.typescriptlang.org): Version 4.2.3
+* [Bootstrap](https://getbootstrap.com): Version 5.0.2
+* [HTML](https://www.w3.org/html)
+
+## API
+
+Consumo de la API testbe. Ejemplos:
+
+### Login:
+* Puede usar el usuario "admin (ROLE_ADMIN)" o "user (ROLE_USER)" con el mismo pass.
+
+```
+GET 'http://localhost:8020/auth/login'
+```
+
+### Candidates:
+
+#### Get one:
+Reemplazar [ID] por el id deseado.
+
+
+```
+GET 'http://localhost:8020/candidates/[ID]'
+```
+
+#### Get pages:
+
+```
+GET 'http://localhost:8020/candidates'
+```
+
+#### Get pages filter:
+Reemplazar [DATA] por el documento o nombre t apellido.
+
+```
+GET 'http://127.0.0.1:8020/candidates/filter/[DATA]' \
+```
+
+#### Get by email:
+Reemplazar [EMAIL] por el email deseado.
+
+```
+GET 'http://localhost:8020/candidates/email/[EMAIL]'
+```
+
+#### Get by document:
+Reemplazar [DOCUMENT] por el documento deseado.
+
+```
+GET 'http://localhost:8020/candidates/document/[DOCUMENT]'
+```
+
+#### Get by fullName:
+Reemplazar [FULL_NAME] por el nombre y apellido deseado.
+
+```
+GET 'http://localhost:8020/candidates/fullName/[FULL_NAME]'
+```
+
+#### Get by document:
+Reemplazar [FULL_NAME] por el nombre y apellido deseado.
+
+```
+curl --location --request GET 'http://localhost:8020/candidates/fullName/[FULL_NAME]'
+```
+
+#### Post one:
+Reemplazar "[FULL_NAME]", [DOCUMENT], "[BIRTH]", "[ADDRESS]", "[PHONE]", "[EMAIL]" por los valores deseados.
+
+```
+POST 'http://localhost:8020/candidates/'
+--data-raw '{
+    "fullName": "[FULL_NAME]",
+    "document": [DOCUMENT],
+    "birth": "[BIRTH]",
+    "address": "[ADDRESS]",
+    "phone": "[PHONE]",
+    "email": "[EMAIL]"
+}'
+```
+
+#### Put one:
+Reemplazar [ID] por el id a modificar y "[FULL_NAME]", [DOCUMENT], "[BIRTH]", "[ADDRESS]", "[PHONE]", "[EMAIL]" por los valores deseados.
+
+```
+PUT 'http://localhost:8020/candidates/[ID]'
+--data-raw '{
+    "fullName": "[FULL_NAME]",
+    "document": [DOCUMENT],
+    "birth": "[BIRTH]",
+    "address": "[ADDRESS]",
+    "phone": "[PHONE]",
+    "email": "[EMAIL]"
+}'
+```
+
+#### Delete one:
+Reemplazar [ID] por el id a eliminar.
+
+```
+DELETE 'http://localhost:8020/candidates/[ID]'
+```
+## Author
+* **Mariano Valle** - *Trabajo Inicial, Documentacion* - [marianovallecv](https://github.com/marianovallecv/testfe/tree/master/doc)
+
+Tambien puedes mirar la lista de todos mis [proyectos](https://github.com/marianovallecv).

@@ -52,29 +52,15 @@ export class PipformatPipe implements PipeTransform {
   }
 
   returnBoolean(value: any): string{
-  // returnBoolean(value: any): HTMLElement{
-    //let returnValue: string;
-    //var parser = new DOMParser();
-
     if (value){
-      return '✓'; //generar constantes globales para usar
-
-      //var doc = parser.parseFromString('<i class="bi bi-check-circle"></i>', 'text/html');
-      //console.log(doc.body)
-      //return doc.body;
-
+      return '✓';
     }else{
-      //var doc = parser.parseFromString('', 'text/html');
-      //return doc.body;
       return '';
     }
-
-
-
   }
 
   returnDate(value: any, format: string): string{
-    let returnValue: any;
+    let returnValue: any = value;
     returnValue = value;
 
     if (format[0] !== ''){
@@ -134,75 +120,4 @@ export class PipformatPipe implements PipeTransform {
     return returnValue;
   }
 
-
-
-
-
-
-
-/*
-  transform (value: string, target: any, type: any, format: any): string{
-    let returnValue: any = '';
-
-    let valueTarget: string = target[0];
-    let valueType: string = type[0];
-    let valueFormat: string = format[0];
-
-    if (valueType === 'number'){
-      returnValue = value;
-    }
-
-    if (valueType === 'date'){
-      if (valueFormat[0] !== ''){
-        returnValue = this.datePipe.transform(value, valueFormat[0], 'UTC');
-      }else{
-        returnValue = this.datePipe.transform(value, 'fullDate', 'UTC');
-      }
-    }
-
-    if (valueType === 'time'){
-      const times = value.split(':');
-      const dateTime = new Date();
-
-      dateTime.setHours(parseInt(times[0]));
-      dateTime.setMinutes(parseInt(times[1]));
-      dateTime.setSeconds(parseInt(times[2]));
-
-      if (valueFormat[0] !== ''){
-        returnValue = this.datePipe.transform(dateTime, valueFormat, 'UTC');
-      }else{
-        returnValue = this.datePipe.transform(dateTime, 'fullTime', 'UTC');
-      }
-    }
-
-    if (valueType === 'field'){
-      value = value[valueTarget];
-    }
-
-    if (valueType === 'string' || valueType === 'field' ){
-      if (valueFormat === 'uppercase'){
-        returnValue = value.toUpperCase();
-      }
-      if (valueFormat === 'lowercase'){
-        returnValue = value.toLowerCase();
-      }
-      if (valueFormat === 'capitalize'){
-        value = value.toLowerCase();
-        const values = value.split(' ');
-        for( let i in values ){
-          values[i] = values[i][0].toUpperCase() + values[i].substr(1);
-        }
-        returnValue = values.join(' ');
-      }
-      if (valueFormat === ''){
-        returnValue = value;
-      }
-    }
-
-    if (valueType === ''){
-      returnValue = value;
-    }
-    return returnValue;
-  }
-*/
 }

@@ -22,7 +22,29 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './components/shared/footer/footer.component';
 
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { PipformatPipe } from './pipes/pipformat.pipe';
+import { PipfilterPipe } from './pipes/pipfilter.pipe';
+
+/*
+------------------------------------------------------------------------------
+Locales
+------------------------------------------------------------------------------
+*/
+import localePy from '@angular/common/locales/es-PY';
+import localePt from '@angular/common/locales/pt';
+import localeEn from '@angular/common/locales/en';
+import localeEsAr from '@angular/common/locales/es-AR';
+
+/*
+------------------------------------------------------------------------------
+Register locals
+------------------------------------------------------------------------------
+*/
+registerLocaleData(localePy, 'es');
+registerLocaleData(localePt, 'pt');
+registerLocaleData(localeEn, 'en');
+registerLocaleData(localeEsAr, 'es-Ar');
 
 @NgModule({
   declarations: [
@@ -34,6 +56,7 @@ import { PipformatPipe } from './pipes/pipformat.pipe';
 
     DisableDirective,
     PipformatPipe,
+    PipfilterPipe,
 
     NavbarComponent,
     LoadingComponent,
@@ -52,6 +75,7 @@ import { PipformatPipe } from './pipes/pipformat.pipe';
   providers: [
     { provide: LOCALE_ID, useValue: 'es-Ar' },
     InterceptorService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
