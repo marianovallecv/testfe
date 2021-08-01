@@ -71,7 +71,6 @@ export class CandidateComponent implements OnInit {
     this.route.params.subscribe(({ id }) => {
       this.id = id? id: 0;
       if (this.id != 0){
-        //this.initForm();
         this.isLoaded = true;
       }
     });

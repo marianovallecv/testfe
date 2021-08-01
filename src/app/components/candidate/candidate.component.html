@@ -68,16 +68,27 @@
                     <!-- Action -->
                     <td *ngFor='let col of columns' class='{{col.class}}'>
                       <!-- ABM -->
-                      <em *ngIf='col.isAdmin && (col.mode == 0 || col.mode == 2)' [style]=col.style class='{{col.icon}}'
+
+                      <!-- <em *ngIf='col.isAdmin && (col.mode == 0 || col.mode == 2)' [style]=col.style class='{{col.icon}}'
                       (click)='one()'
                         routerLink='/{{service.module}}/{{object.id}}'
                         [queryParams]="{modeABM: col.modeABM}"
                         title='{{col.title}}'>
+                      </em> -->
+
+                      <button *ngIf='col.isAdmin && (col.mode == 0 || col.mode == 2)' [style]=col.style  class='btn btn-outline-dark' title = '{{col.title}}' (click)='one()' >
+                      <em  class='{{col.icon}}'
+
+                        routerLink='/{{service.module}}/{{object.id}}'
+
+                        >
                       </em>
+
+                          </button>
+
                     </td>
                   </tr>
                 </tbody>
-                <!-- routerLink='/{{service.module}}/{{col.routerLink}}/{{object.id}}' -->
 
                 <!-- Footer -->
                 <tfoot class="table-dark text-light">
@@ -142,6 +153,7 @@
           </div>
         </div>
 
+        <!-- Formulario -->
         <div class='col-6'>
           <div class=card-body>
             <div class='row m-1'>
@@ -245,8 +257,6 @@
               </div>
             </div>
           </div>
-
-
 
         </div>
       </div>

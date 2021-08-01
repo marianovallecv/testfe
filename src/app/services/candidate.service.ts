@@ -41,29 +41,29 @@ export class CandidateService {
     );
   }
 
-  public oneByName(name: string): Observable<Candidate> {
-    return this.http.get<Candidate>(this.url + `oneByName/${name}`)
+  public oneByFullName(fullname: string): Observable<Candidate> {
+    return this.http.get<Candidate>(this.url + `fullName/${fullname}`)
     .pipe(
       retry(1),
     );
   }
 
-  public oneByFullName(fullname: string): Observable<Candidate> {
-    return this.http.get<Candidate>(this.url + `/${fullname}`)
+  public oneByDocument(document: string): Observable<Candidate> {
+    return this.http.get<Candidate>(this.url + `document/${document}`)
     .pipe(
       retry(1),
     );
   }
 
   public oneByEmail(email: string): Observable<Candidate> {
-    return this.http.get<Candidate>(this.url + `oneByEmail/${email}`)
+    return this.http.get<Candidate>(this.url + `email/${email}`)
     .pipe(
       retry(1),
     );
   }
 
   public save(entity: Candidate): Observable<any> {
-    return this.http.post<any>(this.url + 'save', JSON.stringify(entity), gv.httpOptionsJSON)
+    return this.http.post<any>(this.url, JSON.stringify(entity), gv.httpOptionsJSON)
     .pipe(
       retry(1),
     );
