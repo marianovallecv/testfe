@@ -71,7 +71,7 @@ export class CandidateComponent implements OnInit {
     this.route.params.subscribe(({ id }) => {
       this.id = id? id: 0;
       if (this.id != 0){
-        this.initForm();
+        //this.initForm();
         this.isLoaded = true;
       }
     });
@@ -80,7 +80,6 @@ export class CandidateComponent implements OnInit {
     this.column = 'fullName';
 
     this.isAdmin = this.token.isAdmin();
-    this.id = 1;
     this.items = [5, 10];
 
     this.pages();
@@ -100,41 +99,9 @@ export class CandidateComponent implements OnInit {
    },);
   }
 
-  initForm(){
-    this.setForm();
-  }
-
-  setForm(): void{
-    this.isLogged = this.token.isLogued();
-    this.isAdmin = this.token.isAdmin();
-
-    switch (this.modeABM) {
-      case gv.MODE_ABM.MODE_ABM_DETAIL:
-        this.title = 'Consultar usuario';
-        this.onOne();
-        break;
-      case gv.MODE_ABM.MODE_ABM_CREATE:
-        this.title = 'Crear usuario';
-        break;
-      case gv.MODE_ABM.MODE_ABM_DUPLICATE:
-        this.title = 'Duplicar usuario';
-        this.onOne();
-        break;
-      case gv.MODE_ABM.MODE_ABM_UPDATE:
-        this.title = 'Actualizar usuario';
-        this.onOne();
-        break;
-      case gv.MODE_ABM.MODE_ABM_DELETE:
-        this.title = 'Eliminar usuario';
-        this.onOne();
-        break;
-      default:
-        break;
-    }
-  }
-
-  onOne(): void {
+  one(): void {
     this.loading = true;
+    if(!this.id) return;
     this.service.one(this.id).subscribe(
       (data: Candidate) => {
         this.candidate = data;
@@ -150,7 +117,6 @@ export class CandidateComponent implements OnInit {
   }
 
   setValues(data: Candidate){
-
     this.formGroup.get('fullName')?.setValue(data.fullName);
     this.formGroup.get('document')?.setValue(data.document);
     this.formGroup.get('birth')?.setValue(formatDate(data.birth, 'yyyy-MM-dd', 'es', 'UTC'));
@@ -176,27 +142,63 @@ export class CandidateComponent implements OnInit {
         this.toastr.error(error.message + ' - ' + error.error.message, 'Fail', {
           timeOut: 3000, positionClass: 'toast-top-center',
         });
+        this.loading = false;
       }
     );
   }
 
   delete(id: number): void {
+    if(!this.isSelect(id)) return;
     this.loading = true;
     this.service.delete(id).subscribe(
       (result: any) => {
-        this.toastr.success('Usuerio Eliminado', 'OK', {
+        this.toastr.success('Candidato Eliminado', 'OK', {
           timeOut: 3000, positionClass: 'toast-top-center'
         });
         this.pages();
-
         this.loading = false;
       },
       error => {
         this.toastr.error(error.message + ' - ' + error.error.message, 'Fail', {
           timeOut: 3000, positionClass: 'toast-top-center',
         });
+        this.loading = false;
       }
     );
+  }
+
+  update(): void {
+    if(!this.isSelect(this.id)) return;
+    this.loading = true;
+    this.service.update(this.id, this.candidate).subscribe(
+        (data: Candidate) => {
+          this.toastr.success('Candidato Actualizado', 'OK', {
+            timeOut: 3000, positionClass: 'toast-top-center'
+          });
+          this.pages();
+          this.loading = false;
+        },
+        error => {
+          this.toastr.error(error.message + ' - ' + error.error.message, 'Fail', {
+            timeOut: 3000,  positionClass: 'toast-top-center',
+          });
+          this.loading = false;
+        }
+      );
+  }
+
+  isSelect(id: number): boolean{
+    let value: boolean = false;
+    if (!this.id){
+      this.toastr.warning('por favor seleccione un candidato', 'Warning', {
+        timeOut: 3000, positionClass: 'toast-top-center',
+      });
+    }else{
+      if(window.confirm('¿Seguro desea continuar?')){
+        value = true;
+      }
+    }
+    return value;
   }
 
   modeABMIn(modeABM: number){

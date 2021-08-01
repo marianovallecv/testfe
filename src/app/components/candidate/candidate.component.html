@@ -69,7 +69,7 @@
                     <td *ngFor='let col of columns' class='{{col.class}}'>
                       <!-- ABM -->
                       <em *ngIf='col.isAdmin && (col.mode == 0 || col.mode == 2)' [style]=col.style class='{{col.icon}}'
-                      (click)='onOne()'
+                      (click)='one()'
                         routerLink='/{{service.module}}/{{object.id}}'
                         [queryParams]="{modeABM: col.modeABM}"
                         title='{{col.title}}'>
@@ -228,20 +228,23 @@
           </div>
 
 
-
           <!-- Confirm Action -->
-          <div class='m-3' *ngIf='isAdmin'>
-            <button class='btn btn-outline-warning btn-lb' routerLink='/candidates/create' title = 'Nuevo'>
-            <em class='bi bi-plus-circle'></em> Actualizar datos de del candidato
-            </button>
+          <div class = 'row'>
+            <div class='col-6'>
+              <div class='m-1' *ngIf='isAdmin'>
+                <button class='btn btn-outline-warning' title = 'Actualizar' (click)='update()'>
+                  <em class='bi bi-plus-circle'></em> Actualizar
+                </button>
+              </div>
+            </div>
+            <div class='col-6'>
+              <div class='m-1' *ngIf='isAdmin'>
+                <button class='btn btn-outline-danger' title = 'Nuevo' (click)='delete(id)' >
+                  <em class='bi bi-plus-circle'></em> Eliminar
+                </button>
+              </div>
+            </div>
           </div>
-          <div class='m-3' *ngIf='isAdmin'>
-            <button class='btn btn-outline-danger btn-lb' routerLink='/candidates/delete' title = 'Nuevo' (click)='delete(id)' >
-            <em class='bi bi-plus-circle'></em> Eliminar candidato
-            delete
-            </button>
-          </div>
-
 
 
 

@@ -12,12 +12,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
 
   {path: 'candidates', component: CandidateComponent, canActivate: [guard], data: {expectedRol: ['user', 'admin']}},
+  {path: 'candidates/:id', component: CandidateComponent, canActivate: [guard],data: {expectedRol: ['user', 'admin']}},
 
-  /**
-   * :id: Es el parámetro que tomo desde:
-   * this.id = this.activatedRoute.snapshot.params.id; en cada componente.
-   */
-   {path: 'candidates/:id', component: CandidateComponent, canActivate: [guard],data: {expectedRol: ['user', 'admin']}},
 ];
 
 @NgModule({

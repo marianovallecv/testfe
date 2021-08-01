@@ -70,15 +70,14 @@ export class CandidateService {
   }
 
   public update(id: number, entity: Candidate): Observable<any> {
-    return this.http.put<any>(this.url + 'update/' + id, JSON.stringify(entity), gv.httpOptionsJSON)
+    return this.http.put<any>(this.url + `${id}`, JSON.stringify(entity), gv.httpOptionsJSON)
     .pipe(
       retry(1),
     );
   }
 
   public delete(id: number): Observable<any> {
-    //return this.http.delete<any>(this.url + 'delete/' + id, gv.httpOptionsJSON)
-    return this.http.delete<any>(this.url + `delete/${id}`)
+    return this.http.delete<any>(this.url + `${id}`)
     .pipe(
       retry(1),
     );
@@ -100,8 +99,8 @@ export class CandidateService {
       //{field: 'email', target: '', header: 'Email', type: 'string', format: 'lowercase', class: '', iconSort: 'fas fa-sort', icon: '', style: '', width: '60', col: 'col', color: '', cursor: '', routerLink: '', isAdmin: true, isSort: true, mode: gv.MODE.MODE_ABM_DATA, modeABM: gv.MODE_ABM.MODE_NONE},
 
       {field: '#', target: '', header: '', type: '', format: '', class: '', iconSort: '', icon: 'bi bi-eye', style: 'cursor: pointer; color: green', width: '10', col: 'col-1', color: 'gray', cursor: 'pointer', routerLink: this.class, isAdmin: true, isSort: true, title: 'Consultar', mode: gv.MODE.MODE_ABM, modeABM: gv.MODE_ABM.MODE_ABM_DETAIL},
-      {field: '#', target: '', header: '', type: '', format: '', class: '', iconSort: '', icon: 'bi bi-record-circle', style: 'cursor: pointer; color: orange', width: '10', col: 'col-1', color: 'orange', cursor: 'pointer', routerLink: this.class, isAdmin: true, isSort: true, title: 'Actualizar', mode: gv.MODE.MODE_ABM, modeABM: gv.MODE_ABM.MODE_ABM_UPDATE},
-      {field: '#', target: '', header: '', type: '', format: '', class: '', iconSort: '', icon: 'bi bi-x-circle', style: 'cursor: pointer; color: red', width: '10', col: 'col-1', color: 'red', cursor: 'pointer', routerLink: this.class, isAdmin: true, isSort: true, title: 'Eliminar', mode: gv.MODE.MODE_ABM, modeABM: gv.MODE_ABM.MODE_ABM_DELETE},
+      {field: '#', target: '', header: '', type: '', format: '', class: '', iconSort: '', icon: 'bi bi-pencil', style: 'cursor: pointer; color: orange', width: '10', col: 'col-1', color: 'orange', cursor: 'pointer', routerLink: this.class, isAdmin: true, isSort: true, title: 'Actualizar', mode: gv.MODE.MODE_ABM, modeABM: gv.MODE_ABM.MODE_ABM_UPDATE},
+      {field: '#', target: '', header: '', type: '', format: '', class: '', iconSort: '', icon: 'bi bi-trash', style: 'cursor: pointer; color: red', width: '10', col: 'col-1', color: 'red', cursor: 'pointer', routerLink: this.class, isAdmin: true, isSort: true, title: 'Eliminar', mode: gv.MODE.MODE_ABM, modeABM: gv.MODE_ABM.MODE_ABM_DELETE},
     ];
   }
 }
