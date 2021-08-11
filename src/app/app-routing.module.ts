@@ -13,6 +13,7 @@ const routes: Routes = [
 
   {path: 'candidates', component: CandidateComponent, canActivate: [guard], data: {expectedRol: ['user', 'admin']}},
   {path: 'candidates/:id', component: CandidateComponent, canActivate: [guard],data: {expectedRol: ['user', 'admin']}},
+  {path: 'candidates/delete/:id', component: CandidateComponent, canActivate: [guard],data: {expectedRol: ['user', 'admin']}},
 
 ];
 

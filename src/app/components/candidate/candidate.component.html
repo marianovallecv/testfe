@@ -3,12 +3,13 @@
 
     <!-- Title -->
     <div class='card m-1 bg-dark'>
-      <div class='card-header'>
+      <div class='card-header border-{{colorConfirm}} border-5'>
         <em> Listado de candidatos ({{totalElements}} registros) </em>
+        {{title}}
       </div>
     </div>
 
-    <form class='form' [formGroup]='formGroup'>
+    <form class='form' [formGroup]='formGroup' (ngSubmit)="onSubmit()">
 
       <div class='row'>
 
@@ -19,7 +20,7 @@
               <div class='col'>
                 <div class='form-floating text-dark'>
                   <input class='form-control' type='text' placeholder='Filtrar datos'
-                    [(ngModel)]='searchText' formControlName='searchText' autocomplete='off'>
+                    formControlName='searchText' autocomplete='off'>
                   <label for='searchText'><em class='bi bi-filter'></em> Filtrar datos</label>
                 </div>
               </div>
@@ -76,15 +77,14 @@
                         title='{{col.title}}'>
                       </em> -->
 
-                      <button *ngIf='col.isAdmin && (col.mode == 0 || col.mode == 2)' [style]=col.style  class='btn btn-outline-dark' title = '{{col.title}}' (click)='one()' >
-                      <em  class='{{col.icon}}'
-
-                        routerLink='/{{service.module}}/{{object.id}}'
+                      <button type="button" *ngIf='col.isAdmin && (col.mode == 0 || col.mode == 2)' [style]=col.style
+                      class='btn btn-outline-dark' title = '{{col.title}}' (click)='one(col.modeABM)' >
+                        <em  class='{{col.icon}}'
 
                         >
+                        <!-- routerLink='/{{service.module}}/delete/{{object.id}}' -->
                       </em>
-
-                          </button>
+                      </button>
 
                     </td>
                   </tr>
@@ -243,16 +243,9 @@
           <!-- Confirm Action -->
           <div class = 'row'>
             <div class='col-6'>
-              <div class='m-1' *ngIf='isAdmin'>
-                <button class='btn btn-outline-warning' title = 'Actualizar' (click)='update()'>
-                  <em class='bi bi-plus-circle'></em> Actualizar
-                </button>
-              </div>
-            </div>
-            <div class='col-6'>
-              <div class='m-1' *ngIf='isAdmin'>
-                <button class='btn btn-outline-danger' title = 'Nuevo' (click)='delete(id)' >
-                  <em class='bi bi-plus-circle'></em> Eliminar
+              <div class='m-1' *ngIf='isAdmin && modeABM!=0'>
+                <button class='btn btn-outline-primary' type="submit" title = 'Confirmar'>
+                  <em class='bi bi-plus-circle'></em> Confirmar
                 </button>
               </div>
             </div>

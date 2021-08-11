@@ -28,6 +28,7 @@ export class CandidateComponent implements OnInit {
   formGroup!: FormGroup;
 
   title!: string;
+  colorConfirm!: string;
 
   searchText!: string;
 
@@ -64,7 +65,6 @@ export class CandidateComponent implements OnInit {
   ) {  }
 
   ngOnInit(): void {
-
     this.columns = this.service.columns();
 
     this.buildForm();
@@ -98,24 +98,48 @@ export class CandidateComponent implements OnInit {
    },);
   }
 
-  one(): void {
+  one(modeABM: number): void {
+    this.modeABM = modeABM;
+    this.setForm();
     this.loading = true;
     if(!this.id) return;
     this.service.one(this.id).subscribe(
-      (data: Candidate) => {
-        this.candidate = data;
-        this.setValues(this.candidate);
+      (data: any) => {
+        this.setValues(data);
         this.loading = false;
       },
       error => {
         this.toastr.error(error.message + ' - ' + error.error.message, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
-        });
+          timeOut: 3000, positionClass: 'toast-top-center'});
         this.loading = false;
       });
   }
 
+  setForm(){
+    switch (this.modeABM) {
+      case gv.MODE_ABM.MODE_ABM_DETAIL:
+        this.colorConfirm = 'success'
+        this.title = 'Consultar candidato';
+        break;
+      case gv.MODE_ABM.MODE_ABM_CREATE:
+        this.colorConfirm = 'success'
+        this.title = 'Crear candidato';
+        break;
+      case gv.MODE_ABM.MODE_ABM_UPDATE:
+        this.colorConfirm = 'warning'
+        this.title = 'Actualizar candidato';
+        break;
+      case gv.MODE_ABM.MODE_ABM_DELETE:
+        this.colorConfirm = 'danger'
+        this.title = 'Eliminar candidato';
+        break;
+      default:
+        break;
+    }
+  }
+
   setValues(data: Candidate){
+    this.candidate = data;
     this.formGroup.get('fullName')?.setValue(data.fullName);
     this.formGroup.get('document')?.setValue(data.document);
     this.formGroup.get('birth')?.setValue(formatDate(data.birth, 'yyyy-MM-dd', 'es', 'UTC'));
@@ -139,69 +163,75 @@ export class CandidateComponent implements OnInit {
       },
       error => {
         this.toastr.error(error.message + ' - ' + error.error.message, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
-        });
+          timeOut: 3000, positionClass: 'toast-top-center'});
         this.loading = false;
       }
     );
   }
 
-  delete(id: number): void {
-    if(!this.isSelect(id)) return;
+  delete(): void {
+    //if(!this.isSelect(this.id)) return;
     this.loading = true;
-    this.service.delete(id).subscribe(
+    this.service.delete(this.id).subscribe(
       (result: any) => {
         this.toastr.success('Candidato Eliminado', 'OK', {
-          timeOut: 3000, positionClass: 'toast-top-center'
-        });
+          timeOut: 3000, positionClass: 'toast-top-center'});
         this.pages();
         this.loading = false;
       },
       error => {
         this.toastr.error(error.message + ' - ' + error.error.message, 'Fail', {
-          timeOut: 3000, positionClass: 'toast-top-center',
-        });
+          timeOut: 3000, positionClass: 'toast-top-center'});
         this.loading = false;
       }
     );
   }
 
   update(): void {
-    if(!this.isSelect(this.id)) return;
+   // if(!this.isSelect(this.id)) return;
     this.loading = true;
     this.service.update(this.id, this.candidate).subscribe(
         (data: Candidate) => {
           this.toastr.success('Candidato Actualizado', 'OK', {
-            timeOut: 3000, positionClass: 'toast-top-center'
-          });
+            timeOut: 3000, positionClass: 'toast-top-center'});
           this.pages();
           this.loading = false;
         },
         error => {
           this.toastr.error(error.message + ' - ' + error.error.message, 'Fail', {
-            timeOut: 3000,  positionClass: 'toast-top-center',
-          });
+            timeOut: 3000,  positionClass: 'toast-top-center'});
           this.loading = false;
         }
       );
   }
 
+  onSubmit(){
+    switch (this.modeABM) {
+      case gv.MODE_ABM.MODE_ABM_CREATE:
+        break;
+      case gv.MODE_ABM.MODE_ABM_UPDATE:
+        //if(window.confirm('¿Seguro desea actualizar los datos?')){
+          this.update();
+        //}
+        break;
+      case gv.MODE_ABM.MODE_ABM_DELETE:
+        //if(window.confirm('¿Seguro desea eliminar los datos?')){
+          this.delete();
+        //}
+        break;
+      default:
+        break;
+    }
+  }
+
   isSelect(id: number): boolean{
     let value: boolean = false;
     if (!this.id){
-      this.toastr.warning('por favor seleccione un candidato', 'Warning', {
-        timeOut: 3000, positionClass: 'toast-top-center',
-      });
-    }else{
-      if(window.confirm('¿Seguro desea continuar?')){
-        value = true;
-      }
+      this.toastr.warning('Por favor seleccione un candidato', 'Warning', {
+        timeOut: 3000, positionClass: 'toast-top-center'});
     }
-    return value;
-  }
 
-  modeABMIn(modeABM: number){
-    this.modeABM = modeABM;
+    return value;
   }
 
   go(route: string): void {
